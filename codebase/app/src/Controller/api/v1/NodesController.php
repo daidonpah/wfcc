@@ -38,7 +38,10 @@ class NodesController extends AbstractController
     public function getNodesByNodeIdListGetAction(string $nodeIdList): JsonResponse
     {
         $ids = explode(',', $nodeIdList);
-        $nodes = $this->entityManager->getRepository(Node::class)->find($ids);
+        $nodes = [];
+        foreach ($ids as $id) {
+            $nodes[] = $this->entityManager->getRepository(Node::class)->find($id);
+        }
         /**
          * @var Node[] $nodes
          * @var Node $node
@@ -47,7 +50,7 @@ class NodesController extends AbstractController
             static fn ($node) => [
                 'id' => $node->getId(),
                 'child_node_ids' => $node->getChildNodeIds()
-            ], iterator_to_array($nodes)
+            ], $nodes
         );
         return new JsonResponse($nodes);
     }
