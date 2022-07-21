@@ -1,0 +1,35 @@
+ip: 192.168.10.50
+memory: 2048
+cpus: 2
+provider: virtualbox
+ssl: true
+authorize: ~/.ssh/id_rsa.pub
+keys:
+    - ~/.ssh/id_rsa
+folders:
+    -
+        map: './codebase'
+        to: /home/vagrant/wfcc
+sites:
+    -
+        map: wfcc.test
+        to: /home/vagrant/wfcc/app/public/
+        php: "8.1"
+databases:
+    - wfcc
+features:
+    -
+        mariadb: false
+    -
+        ohmyzsh: true
+    -
+        webdriver: false
+ports:
+    -
+        send: 3000
+        to: 3000
+    -
+        send: 33060
+        to: 3306
+name: wfcc
+hostname: wfcc
