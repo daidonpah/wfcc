@@ -15,8 +15,7 @@ Once the vm is booted, ssh into it with
 Then cd into wfcc/app and run another `composer install`
 
 Then init db:
-> php bin/console doctrine:database:create
-> php bin/console doctrine:migrations:migrate --no-interaction
+> php bin/console doctrine:database:create && php bin/console doctrine:migrations:migrate --no-interaction
 
 
 Now you are good to go and can reach the api under
